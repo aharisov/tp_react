@@ -1,35 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import Button from 'react-bootstrap/Button';
+import AddTaskModal from './AddTaskModal';
+import Column from './Column';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app-cont">
+      <div className="top">
+        <h1>Kanban</h1>
+        <Button variant="primary" onClick={handleShowModal}>
+          Ajouter une tâche
+        </Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="columns">
+        <Column title="À faire" tasks={tasks} status="todo"></Column>
+        <Column title="En cours" tasks={tasks} status="doing"></Column>
+        <Column title="Terminé" tasks={tasks} status="done"></Column>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <AddTaskModal show={showModal} onHide={handleCloseModal}></AddTaskModal>
+    </div>
   )
 }
 
-export default App
+export default App;

@@ -1,8 +1,8 @@
-import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import AddTaskForm from './AddTaskForm';
 
-function AddTaskModal({ show, onHide}) {
+function AddTaskModal({ show, onHide, passFormData}) {
     return(
         <Modal show={show} onHide={onHide}>
             <Modal.Dialog>
@@ -11,7 +11,7 @@ function AddTaskModal({ show, onHide}) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <AddTaskForm />
+                    <AddTaskForm getFormData={passFormData}/>
                 </Modal.Body>
             </Modal.Dialog>
         </Modal>

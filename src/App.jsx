@@ -12,11 +12,18 @@ function App() {
   const handleShowModal = () => setShowModal(true);
 
   function handleFormData(data) {
+    data.id = tasks.length + 1;
     setTasks([...tasks, data]);
   }
 
+  function handleTaskDelete(id) {
+    const newTaskList = tasks.filter(task => task.id != id);
+    // console.log('new list', tasks.length, newTaskList);
+    setTasks(newTaskList);
+  }
+
   useEffect(() => {
-    console.info('task list', tasks);
+    // console.info('task list', tasks);
   }, [tasks]);
 
   return (
@@ -28,9 +35,9 @@ function App() {
         </Button>
       </div>
       <div className="columns">
-        <Column title="À faire" tasks={tasks} status="todo"></Column>
-        <Column title="En cours" tasks={tasks} status="doing"></Column>
-        <Column title="Terminé" tasks={tasks} status="done"></Column>
+        <Column title="À faire" tasks={tasks} status="todo" onTaskDelete={handleTaskDelete}></Column>
+        <Column title="En cours" tasks={tasks} status="doing" onTaskDelete={handleTaskDelete}></Column>
+        <Column title="Terminé" tasks={tasks} status="done" onTaskDelete={handleTaskDelete}></Column>
       </div>
 
       <AddTaskModal show={showModal} onHide={handleCloseModal} passFormData={handleFormData}></AddTaskModal>

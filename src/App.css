@@ -40,3 +40,27 @@
 .modal-content {
   border: none;
 }
+
+.task-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 15px;
+  border: 1px solid #cecece;
+  border-radius: 15px;
+}
+.task-card > div {
+  align-items: center;
+}
+.task-card .task-title {
+  margin: 0 10px;
+  font-size: 20px;
+}
+.task-card .drag-btn {
+  cursor: grab;
+}
+.task-card .drag-btn svg {
+  width: 24px;
+  height: 24px;
+}

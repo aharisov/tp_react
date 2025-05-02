@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import AddTaskModal from './AddTaskModal';
@@ -10,6 +10,14 @@ function App() {
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+
+  function handleFormData(data) {
+    setTasks([...tasks, data]);
+  }
+
+  useEffect(() => {
+    console.info('task list', tasks);
+  }, [tasks]);
 
   return (
     <div className="app-cont">
@@ -25,7 +33,7 @@ function App() {
         <Column title="Terminé" tasks={tasks} status="done"></Column>
       </div>
 
-      <AddTaskModal show={showModal} onHide={handleCloseModal}></AddTaskModal>
+      <AddTaskModal show={showModal} onHide={handleCloseModal} passFormData={handleFormData}></AddTaskModal>
     </div>
   )
 }
